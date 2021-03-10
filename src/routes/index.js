@@ -11,7 +11,7 @@ const actividadController = require("./../controllers/actividadController")
 //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
 router.get("/proyecto", proyectoController.lista);
 
-router.get("/proyecto/crear", proyectoController.crear),
+router.get("/proyecto/crear", proyectoController.crear);
 router.post("/proyecto/", proyectoController.guardar);
 
 router.get("/proyecto/:id", proyectoController.mostrar);
@@ -24,7 +24,7 @@ router.post("/proyecto/:id", proyectoController.eliminar);
 
 //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
 router.get("/actividad", actividadController.lista);
-router.get("/actividad/crear", actividadController.crear),
+router.get("/actividad/crear", actividadController.crear);
 router.post("/actividad/", actividadController.guardar);
 router.get("/actividad/:id", actividadController.mostrar);
 router.get("/actividad/:id/editar", actividadController.editar);
