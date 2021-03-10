@@ -1,0 +1,26 @@
+{
+  "name": "gestion-proyectos",
+  "version": "1.0.0",
+  "description": "Una Aplicacion para gestionar los proyectos y sus actividades",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "sequelize",
+    "ejs",
+    "nodemon"
+  ],
+  "author": "cchura",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
+  }
+}
