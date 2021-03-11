@@ -1,5 +1,5 @@
 // Importar modelos
-const proyecto = require("./../models/proyecto");
+const db = require("./../models");
 
 /**
  * Esta función me permite listar todos
@@ -10,8 +10,10 @@ const proyecto = require("./../models/proyecto");
  */
 const lista = async (req, res) => {
     // Consultas a la BD
-    //let proyectos = await proyecto.findAll();
-    res.send("Lista de Proyecto");
+    let datos = await db.Proyecto.findAll();
+    //res.json(datos)
+    //console.log(datos);
+    res.render("proyecto/index", {titulo: "Lista de Proyectos", proyectos: datos});
 }
 
 /**
@@ -20,7 +22,8 @@ const lista = async (req, res) => {
  */
 const crear = async (req, res) => {
     // Consultas a la BD
-    res.send("Cargar el formulario")
+    //res.send("Cargar el formulario")
+    res.render("proyecto/crear", {titulo: "Nuevo Proyecto"});
 }
 
 /**
@@ -28,6 +31,9 @@ const crear = async (req, res) => {
  */
 const guardar = async (req, res) => {
     // Consultas a la BD
+    //console.log(req.body);
+    await db.Proyecto.create(req.body),
+    res.redirect("/proyecto");
 }
 
 /**
@@ -47,7 +53,9 @@ const mostrar = async (req, res) => {
  */
 const editar = async (req, res) => {
     // Consultas a la BD
-    res.send("Cargar el formulario de edicion de un proyecto")
+    var id = req.params.id;
+    let dato = await db.Proyecto.findByPk(id);
+    res.render("proyecto/editar", {titulo: "Editar Proyecto", proyecto: dato});
 }
 
 /**
@@ -56,6 +64,9 @@ const editar = async (req, res) => {
  */
 const modificar = async (req, res) => {
     // Consultas a la BD
+    var id = req.params.id;
+    await db.Proyecto.update(req.body, {where: {id: id}})
+    res.redirect("/proyecto");
 }
 
 /**
@@ -63,6 +74,9 @@ const modificar = async (req, res) => {
  */
 const eliminar = async (req, res) => {
     // Consultas a la BD
+    var id = req.params.id;
+    await db.Proyecto.destroy({where: {id: id}})
+    res.redirect("/proyecto");
 }
 
 module.exports = {

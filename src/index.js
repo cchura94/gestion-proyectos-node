@@ -11,7 +11,14 @@ const rutasBase = require("./routes")
 //Configuracion de modulos
 var app = express();
 
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 app.use('/', rutasBase);
+
+// Habilitar vistas
+app.set("views", './src/views');
+app.set("view engine", "ejs");
 
 
 // config Variables

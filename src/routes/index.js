@@ -19,7 +19,7 @@ router.get("/proyecto/:id", proyectoController.mostrar);
 router.get("/proyecto/:id/editar", proyectoController.editar);
 router.post("/proyecto/:id", proyectoController.modificar);
 
-router.post("/proyecto/:id", proyectoController.eliminar);
+router.post("/proyecto/eliminar/:id", proyectoController.eliminar);
 
 
 //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
