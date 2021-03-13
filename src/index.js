@@ -3,10 +3,12 @@ var http = require('http');
 
 // Importar modulos de Terceros
 const express = require("express");
+const session = require('express-session');
 
 // importar modulos locales
 const rutasBase = require("./routes")
-
+const passport = require("./config/passport");
+//const passport = require("passport")
 
 //Configuracion de modulos
 var app = express();
@@ -14,6 +16,21 @@ var app = express();
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+
+
+// config sesiones
+app.use(session({
+    secret: 'Mi_Codigo_Secreto',
+    resave: false,
+    saveUninitialized: true,
+    //cookie: { secure: true }
+  }))
+
+  //config passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// config rutas
 app.use('/', rutasBase);
 
 // Habilitar vistas

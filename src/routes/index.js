@@ -1,12 +1,39 @@
 // importacion de modulos de terceros
 const express = require("express")
 var router = express.Router();
+const passport = require('passport')
+
+var bcrypt = require("bcrypt")
 
 // importar modulos Locales
 const proyectoController = require("./../controllers/proyectoController")
 const actividadController = require("./../controllers/actividadController")
 
 // Rutas de Proyecto
+
+router.get("/", (req, res) => {
+    res.render("index");
+});
+
+router.get("/login", (req, res) => {
+    res.render("auth/login");
+});
+
+// Rutas para Auth
+router.post('/login',
+  passport.authenticate('local', { successRedirect: '/proyecto',
+                                   failureRedirect: '/login',
+                                   failureFlash: true,
+                                badRequestMessage: "Ambos campos son obligatorios" })
+);
+
+// Prueba registro
+router.get("/registro", (req, res) => {
+    require("./../models").Usuario.create({
+        correo: "cchura.cpc@gmail.com", 
+        clave: bcrypt.hashSync("cristian123", bcrypt.genSaltSync(10)) 
+    })
+});
 
 //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
 router.get("/proyecto", proyectoController.lista);

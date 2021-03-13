@@ -13,7 +13,7 @@ const lista = async (req, res) => {
     let datos = await db.Proyecto.findAll();
     //res.json(datos)
     //console.log(datos);
-    res.render("proyecto/index", {titulo: "Lista de Proyectos", proyectos: datos});
+    res.render("admin/proyecto/index", {titulo: "Lista de Proyectos", proyectos: datos});
 }
 
 /**
@@ -23,7 +23,7 @@ const lista = async (req, res) => {
 const crear = async (req, res) => {
     // Consultas a la BD
     //res.send("Cargar el formulario")
-    res.render("proyecto/crear", {titulo: "Nuevo Proyecto"});
+    res.render("admin/proyecto/crear", {titulo: "Nuevo Proyecto"});
 }
 
 /**
@@ -55,7 +55,7 @@ const editar = async (req, res) => {
     // Consultas a la BD
     var id = req.params.id;
     let dato = await db.Proyecto.findByPk(id);
-    res.render("proyecto/editar", {titulo: "Editar Proyecto", proyecto: dato});
+    res.render("admin/proyecto/editar", {titulo: "Editar Proyecto", proyecto: dato});
 }
 
 /**
