@@ -13,7 +13,7 @@ const lista = async (req, res) => {
     let datos = await db.Proyecto.findAll();
     //res.json(datos)
     //console.log(datos);
-    res.render("admin/proyecto/index", {titulo: "Lista de Proyectos", proyectos: datos});
+    res.render("admin/proyecto/index", {titulo: "Lista de Proyectos", proyectos: datos, layout: 'layout'});
 }
 
 /**
