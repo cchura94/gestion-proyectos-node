@@ -46,6 +46,9 @@ router.get("/registro", (req, res) => {
 });
 
 //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
+
+router.post("/proyecto/:id/actividad/nuevo", authMiddleware.usuarioAutenticado, proyectoController.asignarActividad);
+
 router.get("/proyecto", authMiddleware.usuarioAutenticado, proyectoController.lista);
 
 router.get("/proyecto/crear", authMiddleware.usuarioAutenticado,proyectoController.crear);

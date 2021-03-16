@@ -43,7 +43,11 @@ const guardar = async (req, res) => {
  */
 const mostrar = async (req, res) => {
     // Consultas a la BD
-    res.send("Mostrar un pryecto")
+    var id = req.params.id;
+    let dato = await db.Proyecto.findByPk(id);
+    let actividades = await db.Actividad.findAll({where: {proyectoId: id}});
+    console.log(actividades);
+    res.render("admin/proyecto/mostrar", {titulo: "Mostrar Proyecto", proyecto: dato, actividades: actividades});
 }
 
 /**
@@ -79,6 +83,21 @@ const eliminar = async (req, res) => {
     res.redirect("/proyecto");
 }
 
+/**
+ * Permite asignar una Actividad a un Proyecto
+ * @param {*} id id de proyecto 
+ */
+const asignarActividad = async (req, res) => {
+    id_proy = req.params.id;
+    await db.Actividad.create({
+        titulo: req.body.titulo,
+        descripcion: req.body.descripcion,
+        proyectoId: id_proy,
+        fecha_ven: req.body.fecha_ven
+    });
+    res.redirect(`/proyecto/${id_proy}`);
+}
+
 module.exports = {
     lista,
     crear,
@@ -86,5 +105,6 @@ module.exports = {
     mostrar,
     editar,
     modificar,
-    eliminar
+    eliminar,
+    asignarActividad
 }
