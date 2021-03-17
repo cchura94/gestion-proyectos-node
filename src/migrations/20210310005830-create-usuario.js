@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       correo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       clave: {
         type: Sequelize.STRING

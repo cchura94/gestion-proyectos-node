@@ -10,13 +10,14 @@ router.use(expressLayouts)
 // importar modulos Locales
 const proyectoController = require("./../controllers/proyectoController")
 const actividadController = require("./../controllers/actividadController")
+const usuarioController = require("./../controllers/usuarioController")
 
 // Importar middlwares
 const authMiddleware = require("./../middlewares/authMiddleware");
 // Rutas de Proyecto
 
 router.get("/", (req, res) => {
-    res.render("index");
+    res.render("index", { layout: 'sitio' });
 });
 
 
@@ -63,13 +64,23 @@ router.post("/proyecto/eliminar/:id", authMiddleware.usuarioAutenticado,proyecto
 
 
 //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
-router.get("/actividad", actividadController.lista);
-router.get("/actividad/crear", actividadController.crear);
-router.post("/actividad/", actividadController.guardar);
-router.get("/actividad/:id", actividadController.mostrar);
-router.get("/actividad/:id/editar", actividadController.editar);
-router.post("/actividad/:id", actividadController.modificar);
-router.post("/actividad/:id", actividadController.eliminar);
+router.get("/actividad", authMiddleware.usuarioAutenticado, actividadController.lista);
+router.get("/actividad/crear", authMiddleware.usuarioAutenticado, actividadController.crear);
+router.post("/actividad/", authMiddleware.usuarioAutenticado, actividadController.guardar);
+router.get("/actividad/:id", authMiddleware.usuarioAutenticado, actividadController.mostrar);
+router.get("/actividad/:id/editar",authMiddleware.usuarioAutenticado,  actividadController.editar);
+router.post("/actividad/:id", authMiddleware.usuarioAutenticado, actividadController.modificar);
+router.post("/actividad/:id", authMiddleware.usuarioAutenticado, actividadController.eliminar);
+
+// Usuarios 
+router.get("/usuario", authMiddleware.usuarioAutenticado, usuarioController.lista);
+router.get("/usuario/crear", usuarioController.crear);
+router.post("/usuario/", usuarioController.guardar);
+router.get("/usuario/:id", authMiddleware.usuarioAutenticado, usuarioController.mostrar);
+router.get("/usuario/:id/editar", authMiddleware.usuarioAutenticado, usuarioController.editar);
+router.post("/usuario/:id", authMiddleware.usuarioAutenticado, usuarioController.modificar);
+router.post("/usuario/:id", authMiddleware.usuarioAutenticado, usuarioController.eliminar);
+
 
 
 module.exports = router;
