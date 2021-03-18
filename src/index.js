@@ -1,8 +1,8 @@
 // importar modulos de core de Node
 var http = require('http');
-var path = require('path');
+import path from "path";
 // Importar modulos de Terceros
-const express = require("express");
+import express from "express";
 const session = require('express-session');
 const expressLayouts = require("express-ejs-layouts")
 
@@ -12,7 +12,7 @@ const passport = require("./config/passport");
 //const passport = require("passport")
 
 //Configuracion de modulos
-var app = express();
+let app = express();
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded

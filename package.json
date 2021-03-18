@@ -4,7 +4,9 @@
   "description": "Una Aplicacion para gestionar los proyectos y sus actividades",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "build": "babel src/ --out-dir dist",
+    "start": "node dist/index.js",
     "migrarBD": "npx sequelize db:migrate",
     "seedBD": "npx sequelize db:seed"
   },
@@ -30,6 +32,10 @@
     "sequelize": "^6.5.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "sequelize-cli": "^6.2.0"
   }
 }

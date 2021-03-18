@@ -1,7 +1,9 @@
 'use strict';
+
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Actividad extends Model {
     /**
@@ -9,15 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-      //console.log(models.Actividad)
-      models.Actividad.belongsTo(models.Proyecto);
-      models.Actividad.belongsToMany(models.Usuario, { 
-        through: "ActividadUsuario" 
-      });
+    static associate(models) {// define association here
     }
-  };
+
+  }
+
+  ;
   Actividad.init({
     titulo: DataTypes.STRING,
     descripcion: DataTypes.TEXT,
@@ -26,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     proyectoId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Actividad',
+    modelName: 'Actividad'
   });
   return Actividad;
 };
