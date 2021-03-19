@@ -12,9 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       //console.log(models.Actividad)
-      models.Actividad.belongsTo(models.Proyecto);
+      models.Actividad.belongsTo(models.Proyecto, {
+        foreignKey: 'proyectoId'
+      });
+      
       models.Actividad.belongsToMany(models.Usuario, { 
-        through: "ActividadUsuario" 
+        through: "ActividadUsuario",
+        foreignKey: 'actividadId'
       });
     }
   };

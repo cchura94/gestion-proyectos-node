@@ -42,12 +42,25 @@ const guardar = async (req, res) => {
  *  @param {*} id 
  */
 const mostrar = async (req, res) => {
+    //Otra opcion
+    let proyecto = await db.Proyecto.findByPk(req.params.id,{
+        include: [db.Actividad]
+    })
+    let usuarios = await db.Usuario.findAll();
+    /*proyecto.actividades.forEach(act => {
+        const result = await db.Actividad.findOne({
+            where: { id: act },
+            include: Usuario
+          });
+    });*/
+   /* console.log(proyecto)
     // Consultas a la BD
     var id = req.params.id;
     let dato = await db.Proyecto.findByPk(id);
     let actividades = await db.Actividad.findAll({where: {proyectoId: id}});
-    console.log(actividades);
-    res.render("admin/proyecto/mostrar", {titulo: "Mostrar Proyecto", proyecto: dato, actividades: actividades});
+    */
+    //console.log(actividades);
+    res.render("admin/proyecto/mostrar", {titulo: "Mostrar Proyecto", proyecto: proyecto, usuarios: usuarios});
 }
 
 /**
@@ -88,7 +101,8 @@ const eliminar = async (req, res) => {
  * @param {*} id id de proyecto 
  */
 const asignarActividad = async (req, res) => {
-    id_proy = req.params.id;
+    console.log("***************************************: ", req.params.id)
+    let id_proy = req.params.id;
     await db.Actividad.create({
         titulo: req.body.titulo,
         descripcion: req.body.descripcion,

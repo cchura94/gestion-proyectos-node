@@ -62,6 +62,8 @@ router.post("/proyecto/:id", authMiddleware.usuarioAutenticado,proyectoControlle
 
 router.post("/proyecto/eliminar/:id", authMiddleware.usuarioAutenticado,proyectoController.eliminar);
 
+// Asignar usuarios a una Actividad
+router.post("/actividad/:id/asignar", authMiddleware.usuarioAutenticado, actividadController.asignarUsuarios)
 
 //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
 router.get("/actividad", authMiddleware.usuarioAutenticado, actividadController.lista);
