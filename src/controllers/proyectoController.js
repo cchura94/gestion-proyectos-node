@@ -47,11 +47,34 @@ const mostrar = async (req, res) => {
         include: [db.Actividad]
     })
     let usuarios = await db.Usuario.findAll();
-    /*proyecto.actividades.forEach(act => {
+
+    // Obtenemos en Proyecto
+    /*let dato = await db.Proyecto.findByPk(req.params.id);
+
+    let actividades = await db.Actividad.findAll({where: {proyectoId: id}});
+    */
+   let i =0;
+   let acti = [];
+   console.log(proyecto.Actividads.length)
+   while(i < proyecto.Actividads.length){
+       let act = proyecto.Actividads[i];
+
         const result = await db.Actividad.findOne({
-            where: { id: act },
+            where: { id: act.id },
+            include: [db.Usuario]
+        });
+        console.log("******: ", result);
+        acti.push(result)
+        
+        i++;
+   }
+   
+    /*proyecto.actividades.forEach(async act => {
+        const result = await db.Actividad.findOne({
+            where: { id: act.id },
             include: Usuario
           });
+        act.usuarios = result
     });*/
    /* console.log(proyecto)
     // Consultas a la BD
@@ -60,7 +83,7 @@ const mostrar = async (req, res) => {
     let actividades = await db.Actividad.findAll({where: {proyectoId: id}});
     */
     //console.log(actividades);
-    res.render("admin/proyecto/mostrar", {titulo: "Mostrar Proyecto", proyecto: proyecto, usuarios: usuarios});
+    res.render("admin/proyecto/mostrar", {titulo: "Mostrar Proyecto", proyecto: proyecto, usuarios: usuarios, actividades:acti});
 }
 
 /**

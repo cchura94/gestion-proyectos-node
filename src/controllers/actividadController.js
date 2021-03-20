@@ -69,6 +69,7 @@ const eliminar = async (req, res) => {
 
 const asignarUsuarios = async (req, res) => {
     let id_act = req.params.id;
+    let id_proy = req.body.id_proy;
     const actividad = await db.Actividad.findByPk(id_act);
     //console.log(req.body);
 
@@ -76,11 +77,7 @@ const asignarUsuarios = async (req, res) => {
         await actividad.addUsuario(user_id);
     });
     
-    res.send("Registrado..");
-
-//const queen = await Profile.create({ name: 'Queen' });
-
-//await amidala.addProfile(queen, { through: { selfGranted: false } });
+    res.redirect(`/proyecto/${id_proy}`)
 }
 
 module.exports = {
