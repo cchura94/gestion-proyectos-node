@@ -1,5 +1,20 @@
 <h1 class="titulo">INICIO</h1>
 <a href="/login">INICIAR SESIN</a>
+<br>
+<label for="">Escriba su mensaje</label>
+<input type="text" id="mensaje">
+<button onclick="enviarMensaje()">Enviar Mensaje</button>
+<hr>
+<br>
+<label for="">Tema</label>
+<input type="text" id="tema">
+<button onclick="suscribirse()">Subscribirse</button>
+<br>
+<hr>
+<p id="mensajes"></p>
+
+
+
 
 <style>
     .titulo{
@@ -16,4 +31,32 @@
         padding: 30px;
         color: #000;
     }
+    p: {
+        color: #fff;
+    }
 </style>
+
+<script src="./browserMqtt.js"></script>
+<script>
+  var client = mqtt.connect("ws://127.0.0.1:8888") // you add a ws:// url here
+
+  function suscribirse() {
+        var tema = document.getElementById("tema").value;
+      client.subscribe(tema)
+      
+  }
+
+  function enviarMensaje() {
+      var mensaje = document.getElementById("mensaje").value;
+      var tema = document.getElementById("tema").value;
+    client.publish(tema, mensaje)
+  }
+ 
+  client.on("message", function (topic, payload) {
+    alert([topic, payload].join(": "))
+    document.getElementById("mensajes").innerHTML = [topic, payload].join(": ");
+    //client.end()
+  })
+ 
+  
+</script> 
