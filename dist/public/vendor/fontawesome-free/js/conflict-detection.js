@@ -3,9 +3,10 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : factory(global['fontawesome-free-conflict-detection'] = {});
-})(this, function (exports) {
-  'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global['fontawesome-free-conflict-detection'] = {})));
+}(this, (function (exports) { 'use strict';
 
   function _typeof(obj) {
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -72,6 +73,7 @@
   var IS_BROWSER = !!WINDOW.document;
   var IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
   var IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
   var functions = [];
 
   var listener = function listener() {
@@ -89,12 +91,12 @@
     if (!loaded) DOCUMENT.addEventListener('DOMContentLoaded', listener);
   }
 
-  function domready(fn) {
+  function domready (fn) {
     if (!IS_DOM) return;
     loaded ? setTimeout(fn, 0) : functions.push(fn);
   }
 
-  function report(_ref) {
+  function report (_ref) {
     var nodesTested = _ref.nodesTested,
         nodesFound = _ref.nodesFound;
     var timedOutTests = {};
@@ -163,12 +165,11 @@
   var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
   function createCommonjsModule(fn, module) {
-    return module = {
-      exports: {}
-    }, fn(module, module.exports), module.exports;
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
   var md5 = createCommonjsModule(function (module) {
+
     (function ($) {
       /**
        * Add integers, wrapping at 2^32.
@@ -178,6 +179,7 @@
        * @param {number} y Second integer
        * @returns {number} Sum
        */
+
       function safeAdd(x, y) {
         var lsw = (x & 0xffff) + (y & 0xffff);
         var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
@@ -946,7 +948,6 @@
     }
   } // Allow clients to access, and in some cases, override some properties
 
-
   var initialConfig = WINDOW.FontAwesomeDetection || {}; // These can be overridden
 
   var _default = {
@@ -989,8 +990,9 @@
       conflictDetection(window.FontAwesomeDetection.report);
     }
   });
+
   exports.conflictDetection = conflictDetection;
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  });
-});
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

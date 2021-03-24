@@ -1,7 +1,9 @@
 "use strict";
 
 // Importar modelos
-const proyecto = require("./../models/actividad");
+//const proyecto = require("./../models/actividad");
+// Importar modelos
+const db = require("./../models");
 /**
  * Esta función me permite listar todos
  * los proyectos de la base de datos
@@ -71,6 +73,17 @@ const modificar = async (req, res) => {// Consultas a la BD
 const eliminar = async (req, res) => {// Consultas a la BD
 };
 
+const asignarUsuarios = async (req, res) => {
+  let id_act = req.params.id;
+  let id_proy = req.body.id_proy;
+  const actividad = await db.Actividad.findByPk(id_act); //console.log(req.body);
+
+  req.body.usuarios.forEach(async user_id => {
+    await actividad.addUsuario(user_id);
+  });
+  res.redirect(`/proyecto/${id_proy}`);
+};
+
 module.exports = {
   lista,
   crear,
@@ -78,5 +91,6 @@ module.exports = {
   mostrar,
   editar,
   modificar,
-  eliminar
+  eliminar,
+  asignarUsuarios
 };

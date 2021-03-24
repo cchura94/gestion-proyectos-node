@@ -161,6 +161,7 @@
   var IS_BROWSER = !!WINDOW.document;
   var IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
   var IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
+
   var NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
   var UNITS_IN_GRID = 16;
   var DEFAULT_FAMILY_PREFIX = 'fa';
@@ -173,7 +174,6 @@
   var HTML_CLASS_I2SVG_BASE_CLASS = 'fontawesome-i2svg';
   var MUTATION_APPROACH_ASYNC = 'async';
   var TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS = ['HTML', 'HEAD', 'STYLE', 'SCRIPT'];
-
   var PRODUCTION = function () {
     try {
       return "production" === 'production';
@@ -181,7 +181,6 @@
       return false;
     }
   }();
-
   var PREFIX_TO_STYLE = {
     'fas': 'solid',
     'far': 'regular',
@@ -222,6 +221,7 @@
   })).concat(oneToTwenty.map(function (n) {
     return "w-".concat(n);
   }));
+
   var initial = WINDOW.FontAwesomeConfig || {};
 
   function getAttrConfig(attr) {
@@ -278,12 +278,14 @@
   var config = _objectSpread({}, _config);
 
   WINDOW.FontAwesomeConfig = config;
+
   var w = WINDOW || {};
   if (!w[NAMESPACE_IDENTIFIER]) w[NAMESPACE_IDENTIFIER] = {};
   if (!w[NAMESPACE_IDENTIFIER].styles) w[NAMESPACE_IDENTIFIER].styles = {};
   if (!w[NAMESPACE_IDENTIFIER].hooks) w[NAMESPACE_IDENTIFIER].hooks = {};
   if (!w[NAMESPACE_IDENTIFIER].shims) w[NAMESPACE_IDENTIFIER].shims = [];
   var namespace = w[NAMESPACE_IDENTIFIER];
+
   var functions = [];
 
   var listener = function listener() {
@@ -301,7 +303,7 @@
     if (!loaded) DOCUMENT.addEventListener('DOMContentLoaded', listener);
   }
 
-  function domready(fn) {
+  function domready (fn) {
     if (!IS_DOM) return;
     loaded ? setTimeout(fn, 0) : functions.push(fn);
   }
@@ -594,6 +596,7 @@
   };
 
   var picked = typeof Promise === 'function' ? Promise : P;
+
   var d = UNITS_IN_GRID;
   var meaninglessTransform = {
     size: 16,
@@ -617,7 +620,6 @@
       }
     }
   }
-
   function insertCss(css) {
     if (!css || !IS_DOM) {
       return;
@@ -641,9 +643,7 @@
     DOCUMENT.head.insertBefore(style, beforeChild);
     return css;
   }
-
   var idPool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
   function nextUniqueId() {
     var size = 12;
     var id = '';
@@ -654,7 +654,6 @@
 
     return id;
   }
-
   function toArray(obj) {
     var array = [];
 
@@ -664,7 +663,6 @@
 
     return array;
   }
-
   function classArray(node) {
     if (node.classList) {
       return toArray(node.classList);
@@ -674,7 +672,6 @@
       });
     }
   }
-
   function getIconName(familyPrefix, cls) {
     var parts = cls.split('-');
     var prefix = parts[0];
@@ -686,27 +683,22 @@
       return null;
     }
   }
-
   function htmlEscape(str) {
     return "".concat(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
-
   function joinAttributes(attributes) {
     return Object.keys(attributes || {}).reduce(function (acc, attributeName) {
       return acc + "".concat(attributeName, "=\"").concat(htmlEscape(attributes[attributeName]), "\" ");
     }, '').trim();
   }
-
   function joinStyles(styles) {
     return Object.keys(styles || {}).reduce(function (acc, styleName) {
       return acc + "".concat(styleName, ": ").concat(styles[styleName], ";");
     }, '');
   }
-
   function transformIsMeaningful(transform) {
     return transform.size !== meaninglessTransform.size || transform.x !== meaninglessTransform.x || transform.y !== meaninglessTransform.y || transform.rotate !== meaninglessTransform.rotate || transform.flipX || transform.flipY;
   }
-
   function transformForSvg(_ref) {
     var transform = _ref.transform,
         containerWidth = _ref.containerWidth,
@@ -729,7 +721,6 @@
       path: path
     };
   }
-
   function transformForCss(_ref2) {
     var transform = _ref2.transform,
         _ref2$width = _ref2.width,
@@ -778,7 +769,7 @@
     }
   }
 
-  function makeIconMasking(_ref) {
+  function makeIconMasking (_ref) {
     var children = _ref.children,
         attributes = _ref.attributes,
         main = _ref.main,
@@ -851,7 +842,7 @@
     };
   }
 
-  function makeIconStandard(_ref) {
+  function makeIconStandard (_ref) {
     var children = _ref.children,
         attributes = _ref.attributes,
         main = _ref.main,
@@ -892,7 +883,7 @@
     };
   }
 
-  function asIcon(_ref) {
+  function asIcon (_ref) {
     var children = _ref.children,
         main = _ref.main,
         mask = _ref.mask,
@@ -919,7 +910,7 @@
     }];
   }
 
-  function asSymbol(_ref) {
+  function asSymbol (_ref) {
     var prefix = _ref.prefix,
         iconName = _ref.iconName,
         children = _ref.children,
@@ -1018,7 +1009,6 @@
       return asIcon(args);
     }
   }
-
   function makeLayersTextAbstract(params) {
     var content = params.content,
         width = params.width,
@@ -1076,7 +1066,6 @@
 
     return val;
   }
-
   function makeLayersCounterAbstract(params) {
     var content = params.content,
         title = params.title,
@@ -1138,6 +1127,7 @@
     begin: begin,
     end: end
   };
+
   /**
    * Internal helper to bind a function known to have 4 arguments
    * to a given context.
@@ -1148,6 +1138,7 @@
       return func.call(thisContext, a, b, c, d);
     };
   };
+
   /**
    * # Reduce
    *
@@ -1195,7 +1186,6 @@
 
     return result;
   }
-
   function codePointAt(string, index) {
     /*! https://mths.be/codepointat v0.2.0 by @mathias */
     var size = string.length;
@@ -1216,7 +1206,6 @@
    * Used to check that the character is between the E000..F8FF private unicode
    * range
    */
-
 
   function isPrivateUnicode(iconName) {
     if (iconName.length !== 1) {
@@ -1267,7 +1256,6 @@
   var _byUnicode = {};
   var _byLigature = {};
   var _byOldName = {};
-
   var build = function build() {
     var lookup = function lookup(reducer) {
       return reduce(styles, function (o, style, prefix) {
@@ -1291,7 +1279,7 @@
       });
       return acc;
     });
-    var hasRegular = ('far' in styles);
+    var hasRegular = 'far' in styles;
     _byOldName = reduce(shims, function (acc, shim) {
       var oldName = shim[0];
       var prefix = shim[1];
@@ -1308,17 +1296,13 @@
       return acc;
     }, {});
   };
-
   build();
-
   function byUnicode(prefix, unicode) {
     return (_byUnicode[prefix] || {})[unicode];
   }
-
   function byLigature(prefix, ligature) {
     return (_byLigature[prefix] || {})[ligature];
   }
-
   function byOldName(name) {
     return _byOldName[name] || {
       prefix: null,
@@ -1327,7 +1311,6 @@
   }
 
   var styles$1 = namespace.styles;
-
   var emptyCanonicalIcon = function emptyCanonicalIcon() {
     return {
       prefix: null,
@@ -1335,7 +1318,6 @@
       rest: []
     };
   };
-
   function getCanonicalIcon(values) {
     return values.reduce(function (acc, cls) {
       var iconName = getIconName(config.familyPrefix, cls);
@@ -1355,7 +1337,6 @@
       return acc;
     }, emptyCanonicalIcon());
   }
-
   function iconFromMapping(mapping, prefix, iconName) {
     if (mapping && mapping[prefix] && mapping[prefix][iconName]) {
       return {
@@ -1471,19 +1452,14 @@
       });
     }
   }
-
   var disabled = false;
-
   function disableObservation() {
     disabled = true;
   }
-
   function enableObservation() {
     disabled = false;
   }
-
   var mo = null;
-
   function observe(options) {
     if (!MUTATION_OBSERVER) {
       return;
@@ -1535,13 +1511,12 @@
       subtree: true
     });
   }
-
   function disconnect() {
     if (!mo) return;
     mo.disconnect();
   }
 
-  function styleParser(node) {
+  function styleParser (node) {
     var style = node.getAttribute('style');
     var val = [];
 
@@ -1562,7 +1537,7 @@
     return val;
   }
 
-  function classParser(node) {
+  function classParser (node) {
     var existingPrefix = node.getAttribute('data-prefix');
     var existingIconName = node.getAttribute('data-icon');
     var innerText = node.innerText !== undefined ? node.innerText.trim() : '';
@@ -1650,17 +1625,16 @@
       }, transform);
     }
   };
-
-  function transformParser(node) {
+  function transformParser (node) {
     return parseTransformString(node.getAttribute('data-fa-transform'));
   }
 
-  function symbolParser(node) {
+  function symbolParser (node) {
     var symbol = node.getAttribute('data-fa-symbol');
     return symbol === null ? false : symbol === '' ? true : symbol;
   }
 
-  function attributesParser(node) {
+  function attributesParser (node) {
     var extraAttributes = toArray(node.attributes).reduce(function (acc, attr) {
       if (acc.name !== 'class' && acc.name !== 'style') {
         acc[attr.name] = attr.value;
@@ -1683,7 +1657,7 @@
     return extraAttributes;
   }
 
-  function maskParser(node) {
+  function maskParser (node) {
     var mask = node.getAttribute('data-fa-mask');
 
     if (!mask) {
@@ -1712,7 +1686,6 @@
       }
     };
   }
-
   function parseMeta(node) {
     var _classParser = classParser(node),
         iconName = _classParser.iconName,
@@ -1746,9 +1719,9 @@
     this.message = error || 'Icon unavailable';
     this.stack = new Error().stack;
   }
-
   MissingIcon.prototype = Object.create(Error.prototype);
   MissingIcon.prototype.constructor = MissingIcon;
+
   var FILL = {
     fill: 'currentColor'
   };
@@ -1818,8 +1791,8 @@
     tag: 'g',
     children: [RING, DOT, QUESTION, EXCLAMATION]
   };
-  var styles$2 = namespace.styles;
 
+  var styles$2 = namespace.styles;
   function resolveCustomIconVersion() {
     var kitConfig = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var iconName = arguments.length > 1 ? arguments[1] : undefined;
@@ -1841,7 +1814,6 @@
       }
     }
   }
-
   function asFoundIcon(icon) {
     var width = icon[0];
     var height = icon[1];
@@ -1891,7 +1863,6 @@
       icon: element
     };
   }
-
   function findIcon(iconName, prefix) {
     return new picked(function (resolve, reject) {
       var val = {
@@ -1905,7 +1876,6 @@
         var icon = styles$2[prefix][iconName];
         return resolve(asFoundIcon(icon));
       }
-
       var kitToken = null;
       var iconVersion = resolveCustomIconVersion(WINDOW.FontAwesomeKitConfig, iconName);
 
@@ -2068,7 +2038,6 @@
       });
     });
   }
-
   function onNode(node) {
     var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
     generateMutation(node).then(function (mutation) {
@@ -2163,7 +2132,7 @@
     return node.parentNode !== document.head && !~TAGNAMES_TO_SKIP_FOR_PSEUDOELEMENTS.indexOf(node.tagName.toUpperCase()) && !node.getAttribute(DATA_FA_PSEUDO_ELEMENT) && (!node.parentNode || node.parentNode.tagName !== 'svg');
   }
 
-  function searchPseudoElements(root) {
+  function searchPseudoElements (root) {
     if (!IS_DOM) return;
     return new picked(function (resolve, reject) {
       var operations = toArray(root.querySelectorAll('*')).filter(processable).map(replace);
@@ -2183,7 +2152,7 @@
 
   var baseStyles = "svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.3333333333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-both,:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:1;opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:.4;opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:.4;opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:1;opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fad.fa-inverse{color:#fff}";
 
-  function css() {
+  function css () {
     var dfp = DEFAULT_FAMILY_PREFIX;
     var drc = DEFAULT_REPLACEMENT_CLASS;
     var fp = config.familyPrefix;
@@ -2200,7 +2169,9 @@
     return s;
   }
 
-  var Library = /*#__PURE__*/function () {
+  var Library =
+  /*#__PURE__*/
+  function () {
     function Library() {
       _classCallCheck(this, Library);
 
@@ -2252,6 +2223,7 @@
   function ensureCss() {
     if (config.autoAddCss && !_cssInserted) {
       insertCss(css());
+
       _cssInserted = true;
     }
   }
@@ -2303,13 +2275,11 @@
   }
 
   var library = new Library();
-
   var noAuto = function noAuto() {
     config.autoReplaceSvg = false;
     config.observeMutations = false;
     disconnect();
   };
-
   var _cssInserted = false;
   var dom = {
     i2svg: function i2svg() {
@@ -2335,6 +2305,7 @@
     insertCss: function insertCss$$1() {
       if (!_cssInserted) {
         insertCss(css());
+
         _cssInserted = true;
       }
     },
@@ -2429,7 +2400,6 @@
       });
     });
   });
-
   var text = function text(content) {
     var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var _params$transform2 = params.transform,
@@ -2459,7 +2429,6 @@
       });
     });
   };
-
   var counter = function counter(content) {
     var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var _params$title3 = params.title,
@@ -2486,7 +2455,6 @@
       });
     });
   };
-
   var layer = function layer(assembler) {
     var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var _params$classes4 = params.classes,
@@ -2510,7 +2478,6 @@
       }];
     });
   };
-
   var api = {
     noAuto: noAuto,
     config: config,
@@ -2568,4 +2535,5 @@
   }
 
   bunker(bootstrap);
-})();
+
+}());

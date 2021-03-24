@@ -53,19 +53,54 @@ const guardar = async (req, res) => {
 
 
 const mostrar = async (req, res) => {
-  // Consultas a la BD
-  var id = req.params.id;
-  let dato = await db.Proyecto.findByPk(id);
-  let actividades = await db.Actividad.findAll({
-    where: {
-      proyectoId: id
-    }
+  //Otra opcion
+  let proyecto = await db.Proyecto.findByPk(req.params.id, {
+    include: [db.Actividad]
   });
-  console.log(actividades);
+  let usuarios = await db.Usuario.findAll(); // Obtenemos en Proyecto
+
+  /*let dato = await db.Proyecto.findByPk(req.params.id);
+    let actividades = await db.Actividad.findAll({where: {proyectoId: id}});
+  */
+
+  let i = 0;
+  let acti = [];
+  console.log(proyecto.Actividads.length);
+
+  while (i < proyecto.Actividads.length) {
+    let act = proyecto.Actividads[i];
+    const result = await db.Actividad.findOne({
+      where: {
+        id: act.id
+      },
+      include: [db.Usuario]
+    });
+    console.log("******: ", result);
+    acti.push(result);
+    i++;
+  }
+  /*proyecto.actividades.forEach(async act => {
+      const result = await db.Actividad.findOne({
+          where: { id: act.id },
+          include: Usuario
+        });
+      act.usuarios = result
+  });*/
+
+  /* console.log(proyecto)
+   // Consultas a la BD
+   var id = req.params.id;
+   let dato = await db.Proyecto.findByPk(id);
+   let actividades = await db.Actividad.findAll({where: {proyectoId: id}});
+   */
+  //console.log(actividades);
+
+
   res.render("admin/proyecto/mostrar", {
     titulo: "Mostrar Proyecto",
-    proyecto: dato,
-    actividades: actividades
+    proyecto: proyecto,
+    usuarios: usuarios,
+    actividades: acti
   });
 };
 /**
@@ -122,7 +157,8 @@ const eliminar = async (req, res) => {
 
 
 const asignarActividad = async (req, res) => {
-  id_proy = req.params.id;
+  console.log("***************************************: ", req.params.id);
+  let id_proy = req.params.id;
   await db.Actividad.create({
     titulo: req.body.titulo,
     descripcion: req.body.descripcion,

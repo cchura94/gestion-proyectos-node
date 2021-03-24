@@ -5,6 +5,10 @@ import path from "path";
 import express from "express";
 const session = require('express-session');
 const expressLayouts = require("express-ejs-layouts")
+// Para MQTT
+const aedes = require('aedes')()
+const ws = require('websocket-stream')
+const port_ws = 8888; // Para WS
 
 // importar modulos locales
 const rutasBase = require("./routes")
@@ -50,7 +54,9 @@ app.set('port', PORT);
 // Crear el Servidor
 var server = http.createServer(app);
 
-// Levantar el Servidor
+// BROKER MQTT WS
+ws.createServer({ server: server }, aedes.handle)
+// Levantar el Servidor HTTP
 
 server.listen(app.get('port'), () => {
     console.log(`Servidor Levantado en http://127.0.0.1:${app.get('port')}`);

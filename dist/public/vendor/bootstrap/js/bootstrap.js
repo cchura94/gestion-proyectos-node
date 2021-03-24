@@ -1,23 +1,17 @@
-"use strict";
-
 /*!
   * Bootstrap v4.5.3 (https://getbootstrap.com/)
   * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) : typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
-})(void 0, function (exports, $, Popper) {
-  'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.bootstrap = {}, global.jQuery, global.Popper));
+}(this, (function (exports, $, Popper) { 'use strict';
 
-  function _interopDefaultLegacy(e) {
-    return e && typeof e === 'object' && 'default' in e ? e : {
-      'default': e
-    };
-  }
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
   var $__default = /*#__PURE__*/_interopDefaultLegacy($);
-
   var Popper__default = /*#__PURE__*/_interopDefaultLegacy(Popper);
 
   function _defineProperties(target, props) {
@@ -59,19 +53,18 @@
     subClass.prototype.constructor = subClass;
     subClass.__proto__ = superClass;
   }
+
   /**
    * --------------------------------------------------------------------------
    * Bootstrap (v4.5.3): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
-
   /**
    * ------------------------------------------------------------------------
    * Private TransitionEnd Helpers
    * ------------------------------------------------------------------------
    */
-
 
   var TRANSITION_END = 'transitionend';
   var MAX_UID = 1000000;
@@ -234,6 +227,7 @@
   };
   Util.jQueryDetection();
   setTransitionEndSupport();
+
   /**
    * ------------------------------------------------------------------------
    * Constants
@@ -265,8 +259,9 @@
     } // Getters
 
 
-    var _proto = Alert.prototype; // Public
+    var _proto = Alert.prototype;
 
+    // Public
     _proto.close = function close(element) {
       var rootElement = this._element;
 
@@ -388,12 +383,12 @@
     $__default['default'].fn[NAME] = JQUERY_NO_CONFLICT;
     return Alert._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$1 = 'button';
   var VERSION$1 = '4.5.3';
@@ -427,8 +422,9 @@
     } // Getters
 
 
-    var _proto = Button.prototype; // Public
+    var _proto = Button.prototype;
 
+    // Public
     _proto.toggle = function toggle() {
       var triggerChangeEvent = true;
       var addAriaPressed = true;
@@ -586,12 +582,12 @@
     $__default['default'].fn[NAME$1] = JQUERY_NO_CONFLICT$1;
     return Button._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$2 = 'carousel';
   var VERSION$2 = '4.5.3';
@@ -685,8 +681,9 @@
     } // Getters
 
 
-    var _proto = Carousel.prototype; // Public
+    var _proto = Carousel.prototype;
 
+    // Public
     _proto.next = function next() {
       if (!this._isSliding) {
         this._slide(DIRECTION_NEXT);
@@ -1173,12 +1170,12 @@
     $__default['default'].fn[NAME$2] = JQUERY_NO_CONFLICT$2;
     return Carousel._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$3 = 'collapse';
   var VERSION$3 = '4.5.3';
@@ -1247,8 +1244,9 @@
     } // Getters
 
 
-    var _proto = Collapse.prototype; // Public
+    var _proto = Collapse.prototype;
 
+    // Public
     _proto.toggle = function toggle() {
       if ($__default['default'](this._element).hasClass(CLASS_NAME_SHOW$1)) {
         this.hide();
@@ -1521,12 +1519,12 @@
     $__default['default'].fn[NAME$3] = JQUERY_NO_CONFLICT$3;
     return Collapse._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$4 = 'dropdown';
   var VERSION$4 = '4.5.3';
@@ -1607,8 +1605,9 @@
     } // Getters
 
 
-    var _proto = Dropdown.prototype; // Public
+    var _proto = Dropdown.prototype;
 
+    // Public
     _proto.toggle = function toggle() {
       if (this._element.disabled || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED)) {
         return;
@@ -2034,12 +2033,12 @@
     $__default['default'].fn[NAME$4] = JQUERY_NO_CONFLICT$4;
     return Dropdown._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$5 = 'modal';
   var VERSION$5 = '4.5.3';
@@ -2106,8 +2105,9 @@
     } // Getters
 
 
-    var _proto = Modal.prototype; // Public
+    var _proto = Modal.prototype;
 
+    // Public
     _proto.toggle = function toggle(relatedTarget) {
       return this._isShown ? this.hide() : this.show(relatedTarget);
     };
@@ -2648,14 +2648,13 @@
     $__default['default'].fn[NAME$5] = JQUERY_NO_CONFLICT$5;
     return Modal._jQueryInterface;
   };
+
   /**
    * --------------------------------------------------------------------------
    * Bootstrap (v4.5.3): tools/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
-
-
   var uriAttrs = ['background', 'cite', 'href', 'itemtype', 'longdesc', 'poster', 'src', 'xlink:href'];
   var ARIA_ATTRIBUTE_PATTERN = /^aria-[\w-]*$/i;
   var DefaultWhitelist = {
@@ -2770,12 +2769,12 @@
 
     return createdDocument.body.innerHTML;
   }
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$6 = 'tooltip';
   var VERSION$6 = '4.5.3';
@@ -2877,8 +2876,9 @@
     } // Getters
 
 
-    var _proto = Tooltip.prototype; // Public
+    var _proto = Tooltip.prototype;
 
+    // Public
     _proto.enable = function enable() {
       this._isEnabled = true;
     };
@@ -3482,12 +3482,12 @@
     $__default['default'].fn[NAME$6] = JQUERY_NO_CONFLICT$6;
     return Tooltip._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$7 = 'popover';
   var VERSION$7 = '4.5.3';
@@ -3537,8 +3537,9 @@
       return _Tooltip.apply(this, arguments) || this;
     }
 
-    var _proto = Popover.prototype; // Overrides
+    var _proto = Popover.prototype;
 
+    // Overrides
     _proto.isWithContent = function isWithContent() {
       return this.getTitle() || this._getContent();
     };
@@ -3661,12 +3662,12 @@
     $__default['default'].fn[NAME$7] = JQUERY_NO_CONFLICT$7;
     return Popover._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$8 = 'scrollspy';
   var VERSION$8 = '4.5.3';
@@ -3726,8 +3727,9 @@
     } // Getters
 
 
-    var _proto = ScrollSpy.prototype; // Public
+    var _proto = ScrollSpy.prototype;
 
+    // Public
     _proto.refresh = function refresh() {
       var _this2 = this;
 
@@ -3952,12 +3954,12 @@
     $__default['default'].fn[NAME$8] = JQUERY_NO_CONFLICT$8;
     return ScrollSpy._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$9 = 'tab';
   var VERSION$9 = '4.5.3';
@@ -3994,8 +3996,9 @@
     } // Getters
 
 
-    var _proto = Tab.prototype; // Public
+    var _proto = Tab.prototype;
 
+    // Public
     _proto.show = function show() {
       var _this = this;
 
@@ -4177,12 +4180,12 @@
     $__default['default'].fn[NAME$9] = JQUERY_NO_CONFLICT$9;
     return Tab._jQueryInterface;
   };
+
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-
 
   var NAME$a = 'toast';
   var VERSION$a = '4.5.3';
@@ -4225,8 +4228,9 @@
     } // Getters
 
 
-    var _proto = Toast.prototype; // Public
+    var _proto = Toast.prototype;
 
+    // Public
     _proto.show = function show() {
       var _this = this;
 
@@ -4407,7 +4411,8 @@
   exports.Toast = Toast;
   exports.Tooltip = Tooltip;
   exports.Util = Util;
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  });
-});
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+//# sourceMappingURL=bootstrap.js.map

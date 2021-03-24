@@ -11,8 +11,15 @@ var http = require('http');
 
 const session = require('express-session');
 
-const expressLayouts = require("express-ejs-layouts"); // importar modulos locales
+const expressLayouts = require("express-ejs-layouts"); // Para MQTT
 
+
+const aedes = require('aedes')();
+
+const ws = require('websocket-stream');
+
+const port_ws = 8888; // Para WS
+// importar modulos locales
 
 const rutasBase = require("./routes");
 
@@ -48,7 +55,11 @@ app.use(_express.default.static(_path.default.join(__dirname, 'public'))); // co
 var PORT = process.env.PORT || '3000';
 app.set('port', PORT); // Crear el Servidor
 
-var server = http.createServer(app); // Levantar el Servidor
+var server = http.createServer(app); // BROKER MQTT WS
+
+ws.createServer({
+  server: server
+}, aedes.handle); // Levantar el Servidor HTTP
 
 server.listen(app.get('port'), () => {
   console.log(`Servidor Levantado en http://127.0.0.1:${app.get('port')}`);

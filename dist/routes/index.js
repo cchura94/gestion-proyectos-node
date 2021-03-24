@@ -59,7 +59,9 @@ router.post("/proyecto/", authMiddleware.usuarioAutenticado, proyectoController.
 router.get("/proyecto/:id", authMiddleware.usuarioAutenticado, proyectoController.mostrar);
 router.get("/proyecto/:id/editar", authMiddleware.usuarioAutenticado, proyectoController.editar);
 router.post("/proyecto/:id", authMiddleware.usuarioAutenticado, proyectoController.modificar);
-router.post("/proyecto/eliminar/:id", authMiddleware.usuarioAutenticado, proyectoController.eliminar); //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
+router.post("/proyecto/eliminar/:id", authMiddleware.usuarioAutenticado, proyectoController.eliminar); // Asignar usuarios a una Actividad
+
+router.post("/actividad/:id/asignar", authMiddleware.usuarioAutenticado, actividadController.asignarUsuarios); //- METODO - URL - (Midleware) - CONTROLLER - FUNCION
 
 router.get("/actividad", authMiddleware.usuarioAutenticado, actividadController.lista);
 router.get("/actividad/crear", authMiddleware.usuarioAutenticado, actividadController.crear);

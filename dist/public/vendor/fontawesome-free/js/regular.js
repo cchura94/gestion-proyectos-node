@@ -22,8 +22,8 @@
   var IS_BROWSER = !!WINDOW.document;
   var IS_DOM = !!DOCUMENT.documentElement && !!DOCUMENT.head && typeof DOCUMENT.addEventListener === 'function' && typeof DOCUMENT.createElement === 'function';
   var IS_IE = ~userAgent.indexOf('MSIE') || ~userAgent.indexOf('Trident/');
-  var NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
 
+  var NAMESPACE_IDENTIFIER = '___FONT_AWESOME___';
   var PRODUCTION = function () {
     try {
       return "production" === 'production';
@@ -272,7 +272,9 @@
     "window-minimize": [512, 512, [], "f2d1", "M480 480H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h448c17.7 0 32 14.3 32 32s-14.3 32-32 32z"],
     "window-restore": [512, 512, [], "f2d2", "M464 0H144c-26.5 0-48 21.5-48 48v48H48c-26.5 0-48 21.5-48 48v320c0 26.5 21.5 48 48 48h320c26.5 0 48-21.5 48-48v-48h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-96 464H48V256h320v208zm96-96h-48V144c0-26.5-21.5-48-48-48H144V48h320v320z"]
   };
+
   bunker(function () {
     defineIcons('far', icons);
   });
-})();
+
+}());

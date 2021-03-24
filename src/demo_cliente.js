@@ -1,5 +1,5 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('ws://127.0.0.1:8888')
+var client  = mqtt.connect('ws://127.0.0.1:3000')
  
 client.on('connect', function () {
   client.subscribe('test', function (err) {
